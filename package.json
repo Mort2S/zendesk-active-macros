@@ -1,12 +1,13 @@
 {
-  "name": "zendesk-makro-list",
+  "name": "zendesk-active-macros",
   "version": "1.0.0",
-  "description": "",
+  "description": "This project provides a simple Node.js script to fetch all **active macros** from a Zendesk instance.  \r It exports the data as both a `.json` and a `.csv` file, making it easy to review or process macros externally.",
   "main": "makrolist.js",
   "keywords": [],
   "author": "",
   "license": "MIT",
   "dependencies": {
     "axios": "^1.8.4"
-  }
+  },
+  "devDependencies": {}
 }
