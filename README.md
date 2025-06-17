@@ -1,6 +1,6 @@
 # Zendesk Active Macro Exporter
 
-This project provides a simple Node.js script to fetch all **active macros** from a Zendesk instance.  
+This project provides a simple Node.js script to fetch all **active macros** from a Zendesk instance.
 It exports the data as both a `.json` and a `.csv` file, making it easy to review or process macros externally.
 
 ## Prerequisites
@@ -16,7 +16,7 @@ It exports the data as both a `.json` and a `.csv` file, making it easy to revie
 3. Install the required dependencies:
 
    ```bash
-   npm install axios
+   npm install
    ```
 
 ## Configuration
@@ -60,14 +60,20 @@ The script will:
 After execution, two files will be generated in the project directory:
 
 - `active_<subdomain>_macros.json`: Full macro data in JSON format
-- `active_<subdomain>_macros.csv`: A structured CSV file with the following columns:
-  - `title`
-  - `id`
-  - `description`
-  - `comment`
-  - `tags`
-  - `status`
-  - `comment_mode_is_public`
-  - Any additional custom field IDs defined in the config
+- `active_<subdomain>_macros.csv`: A structured CSV file with selected fields
 
 The CSV uses `;` (semicolon) as the delimiter and properly escapes special characters.
+
+## Config Manager Web Interface
+
+This repository also contains a simple web interface to create and load encrypted configuration files.
+
+Start the server with:
+
+```bash
+npm start
+```
+
+The application will run on [http://localhost:3000](http://localhost:3000). Open this address in your browser to access the interface.
+
+Config files are stored in the `configs/` directory in encrypted form. Supply the same passphrase when saving and loading a file to decrypt its contents.
