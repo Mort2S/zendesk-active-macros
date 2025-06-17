@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Config Manager</title>
+</head>
+<body>
+<h1>Config Manager</h1>
+<section>
+<h2>Create Config</h2>
+<form id="createForm">
+<label>Name: <input type="text" id="name" required></label><br>
+<label>Passphrase: <input type="password" id="passphrase" required></label><br>
+<label>Data (JSON):<br><textarea id="data" rows="10" cols="50" required>{}</textarea></label><br>
+<button type="submit">Save</button>
+</form>
+</section>
+<section>
+<h2>Load Config</h2>
+<form id="loadForm">
+<label>Name: <input type="text" id="loadName" required></label><br>
+<label>Passphrase: <input type="password" id="loadPass" required></label><br>
+<button type="submit">Load</button>
+</form>
+<pre id="output"></pre>
+</section>
+<script>
+const createForm = document.getElementById('createForm');
+createForm.addEventListener('submit', async e => {
+  e.preventDefault();
+  const res = await fetch('/config', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      name: document.getElementById('name').value,
+      passphrase: document.getElementById('passphrase').value,
+      data: JSON.parse(document.getElementById('data').value)
+    })
+  });
+  const data = await res.json();
+  alert(JSON.stringify(data));
+});
+
+const loadForm = document.getElementById('loadForm');
+loadForm.addEventListener('submit', async e => {
+  e.preventDefault();
+  const name = document.getElementById('loadName').value;
+  const pass = document.getElementById('loadPass').value;
+  const res = await fetch(`/config/${encodeURIComponent(name)}?passphrase=${encodeURIComponent(pass)}`);
+  const data = await res.json();
+  document.getElementById('output').textContent = JSON.stringify(data, null, 2);
+});
+</script>
+</body>
+</html>
